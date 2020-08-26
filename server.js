@@ -11,6 +11,10 @@ const app = express()
 app.use(bodyParser.json())
 
 app.get('/health', api.getHealth)
+app.route('/:studentId/*')
+  .post(api.createStudent)
+  .get(api.getStudent)
+  .delete(api.deleteStudent)
 
 app.use(middleware.handleError)
 app.use(middleware.notFound)
