@@ -1,13 +1,15 @@
+const fs = require('fs');
+const path = require('path');
+
+const dataDir = path.join(__dirname + '/../data/');
+const fileExt = '.json';
+
 module.exports = {
     writeToFile,
     readFile,
     deleteFile,
 };
 
-const fs = require('fs');
-const path = require('path');
-const dataDir = path.join(__dirname + '/../data/');
-const fileExt = '.json';
 
 function writeToFile(fileName, data) {
     return new Promise((resolve, reject) => {

@@ -12,9 +12,9 @@ app.use(bodyParser.json())
 
 app.get('/health', api.getHealth)
 app.route('/:studentId/*')
-  .post(api.createStudent)
-  .get(api.getStudent)
-  .delete(api.deleteStudent)
+  .post(api.createStudentScore)
+  .get(api.getStudentScore)
+  .delete(api.deleteStudentScore)
 
 app.use(middleware.handleError)
 app.use(middleware.notFound)

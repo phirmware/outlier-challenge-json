@@ -1,19 +1,18 @@
-module.exports = {
-  getHealth,
-  createStudent,
-  getStudent,
-  deleteStudent,
-}
-
 const fileHelper = require('./helpers/file');
 const utils = require('./helpers/utils');
-const { createObjectFromParams } = require('./helpers/utils');
+
+module.exports = {
+  getHealth,
+  createStudentScore,
+  getStudentScore,
+  deleteStudentScore,
+}
 
 async function getHealth(req, res, next) {
   res.json({ success: true })
 }
 
-async function createStudent(req, res, next) {
+async function createStudentScore(req, res, next) {
   try {
     const { score } = req.body;
     const postData = utils.createObjectFromParams(req.params[0], score);
@@ -28,7 +27,7 @@ async function createStudent(req, res, next) {
   }
 }
 
-async function getStudent(req, res, next) {
+async function getStudentScore(req, res, next) {
   try {
     const { studentId } = req.params;
     const path = req.params[0];
@@ -47,10 +46,10 @@ async function getStudent(req, res, next) {
   }
 }
 
-async function deleteStudent(req, res, next) {
+async function deleteStudentScore(req, res, next) {
   try {
     const { studentId } = req.params;
-    const postData = createObjectFromParams(req.params[0], {});
+    const postData = utils.createObjectFromParams(req.params[0], {});
     const data = await fileHelper.writeToFile(studentId, postData);
     res.json({ data });
   } catch (error) {
