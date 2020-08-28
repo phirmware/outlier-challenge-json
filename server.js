@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 1337
 const app = express()
 
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json({ type : '*/*' }))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/health', api.getHealth)
 app.route('/:studentId/*')

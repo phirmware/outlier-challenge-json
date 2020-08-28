@@ -14,8 +14,7 @@ async function getHealth(req, res, next) {
 
 async function createStudentScore(req, res, next) {
   try {
-    const { score } = req.body;
-    const postData = utils.createObjectFromParams(req.params[0], score);
+    const postData = utils.createObjectFromParams(req.params[0], req.body);
     const { studentId } = req.params;
     const data = await fileHelper.writeToFile(studentId, postData);
     if (!data) {
@@ -49,7 +48,14 @@ async function getStudentScore(req, res, next) {
 async function deleteStudentScore(req, res, next) {
   try {
     const { studentId } = req.params;
-    const postData = utils.createObjectFromParams(req.params[0], {});
+    const path = req.params[0];
+    const deepPath = path.replace(/\//g, '.');
+    const fileData = await fileHelper.readFile(studentId);
+    const result = utils.resolveObjectPath(deepPath, fileData)
+    if (!result) {
+      return res.status(404).json({ message: 'Property does not exist' });
+    }
+    const postData = utils.createObjectFromParams(path, {});
     const data = await fileHelper.writeToFile(studentId, postData);
     res.json({ data });
   } catch (error) {
