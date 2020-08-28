@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 
 app.get('/health', api.getHealth)
 app.route('/:studentId/*')
-  .post(api.createStudentScore)
+  .put(api.createStudentScore)
   .get(api.getStudentScore)
   .delete(api.deleteStudentScore)
 
